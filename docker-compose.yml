@@ -1,0 +1,13 @@
+services:
+  trading-bot:
+    build: .
+    container_name: trading-bot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TZ: America/New_York
+    volumes:
+      # SQLite database + market-data cache + mock account live here so
+      # state survives restarts/updates.
+      - ./data:/app/data
+      - /home/housedv/projects/fleet-wiki/wiki:/app/fleet-wiki:ro
